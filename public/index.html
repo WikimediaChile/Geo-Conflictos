@@ -511,14 +511,38 @@
         }
 
         footer { background-color: var(--bg-secondary); border-top: 1px solid var(--border-color); padding: var(--space-md) 0; flex-shrink: 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); transition: background-color 0.3s, border-color 0.3s;}
-        .footer-container { max-width: 1400px; margin: 0 auto; padding: 0 var(--space-lg); text-align: center; color: var(--text-secondary); }
+        .footer-container { max-width: 1400px; margin: 0 auto; padding: 0 var(--space-lg); text-align: center; color: var(--text-secondary); margin-top: 1.25rem; }
         .footer-logos { display: flex; justify-content: center; align-items: center; gap: var(--space-lg); margin-bottom: var(--space-sm); }
         .footer-logos img { height: 40px; width: auto; }
         [data-theme="dark"] .footer-logos img { filter: invert(1) opacity(0.8); }
         .footer-text { font-size: 0.9rem; margin-bottom: 0.5rem; }
-        .footer-copyright { font-size: 0.8rem; }
+        .footer-copyright { font-size: 0.8rem; margin-bottom: 2rem; }
         .loading { display: flex; justify-content: center; align-items: center; height: 100%; font-size: 1.2rem; color: var(--text-secondary); position: absolute; width: 100%; background-color: rgba(0,0,0,0.5); z-index: 10; border-radius: 0.75rem; }
         .loading::after { content: ""; width: 24px; height: 24px; border: 3px solid var(--border-color); border-top: 3px solid var(--action-color); border-radius: 50%; margin-left: 12px; animation: spin 1s linear infinite; }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.75rem;
+            }
+
+        .footer-links a {
+        color: var(--text-secondary);
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        padding: 0.35rem 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        background: var(--bg-primary);
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+        }
+
+        .footer-links a:hover {
+        background: var(--border-color);
+        color: var(--text-primary);
+        }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .message { padding: var(--space-sm) var(--space-md); text-align: center; background-color: var(--action-color-light); border-radius: 0.75rem; color: var(--action-color); border-left: 4px solid var(--action-color); position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 1001; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         
@@ -802,16 +826,31 @@
                     </div>
                 </div>
                 
-                <footer>
+                    <footer>
                     <div class="footer-container">
-                        <div class="footer-logos">
-                            <a href="https://www.wikimedia.cl/" target="_blank" rel="noopener noreferrer"><img src="wikiemdia foundation logo.webp" alt="Logo Wikimedia Chile"></a>
-                            <a href="https://www.wikidata.org/" target="_blank" rel="noopener noreferrer"><img src="wikidata logo.png" alt="Logo Wikidata"></a>
+
+                        <div class="footer-links">
+                        <a href="https://www.wikidata.org/wiki/Wikidata:Tools/Geo-Conflicts">{{ t('footer.links.about') }}</a>
+                        <a href="https://github.com/WikimediaChile/Geo-Conflictos" target="_blank" rel="noopener noreferrer">
+                            {{ t('footer.links.source') }}
+                        </a>
                         </div>
-                        <p class="footer-text">{{ t('footer.text') }}</p>
-                        <p class="footer-copyright">© {{ new Date().getFullYear() }} {{ t('footer.copyright') }}</p>
+
+                        <p class="footer-copyright">
+                        {{ new Date().getFullYear() }} {{ t('footer.legal') }}
+                        </p>
+
+                        <div class="footer-logos">
+                        <a href="https://www.wikimedia.cl/" target="_blank" rel="noopener noreferrer">
+                            <img src="wikiemdia foundation logo.webp" alt="Logo Wikimedia Chile">
+                        </a>
+                        <a href="https://www.wikidata.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="wikidata logo.png" alt="Logo Wikidata">
+                        </a>
+                        </div>
+
                     </div>
-                </footer>
+                    </footer>
             </div>
         `;
 
@@ -858,7 +897,7 @@
                         statusInfo: { Activo: { icon: 'fa-fire-alt', text: 'Conflicto Activo' }, Latente: { icon: 'fa-hourglass-half', text: 'Conflicto Latente' }, Resuelto: { icon: 'fa-check-circle', text: 'Conflicto Resuelto' }, Desconocido: { icon: 'fa-question-circle', text: 'Estado Desconocido' } },
                         tutorial: { step1: { title: 'Panel de Filtros', text: 'Aquí puedes filtrar los conflictos por país, nombre, sector y más. Selecciona uno o varios países y presiona "Ver Conflictos" para empezar.', icon: 'fa-filter' }, step2: { title: 'Mapa Interactivo', text: 'Los conflictos aparecerán aquí. Los puntos con borde discontinuo indican una ubicación aproximada. Haz clic en un punto para ver más detalles.', icon: 'fa-map-marked-alt' }, step3: { title: 'Estadísticas y Detalles', text: 'Este panel muestra un resumen de los conflictos visualizados. Al seleccionar un conflicto en el mapa, aquí verás su información detallada.', icon: 'fa-chart-bar' }, previous: 'Anterior', next: 'Siguiente', finish: 'Finalizar', skip: 'Omitir' },
                         welcome: { title: 'Exploración Iniciada', message: '¡Todo listo! Ya puedes navegar, filtrar y descubrir los conflictos socioambientales. ¡Que tu curiosidad sea tu guía!', button: 'Comenzar a Explorar' },
-                        footer: { text: 'Desarrollado con datos de Wikidata, un proyecto de la Fundación Wikimedia.', copyright: 'Wikimedia Chile. Contenido disponible bajo licencia CC BY-SA 4.0.' },
+                        footer: {links: { about: 'Acerca de', source: 'Código fuente'}, legal: 'Wikimedia Chile. Contenido disponible bajo licencia CC BY-SA 4.0. Desarrollado con datos de Wikidata.'},
                         selectAll: 'Seleccionar todos',
                         deselectAll: 'Deseleccionar todos',
                         theme: { toggle: 'Cambiar tema' }
@@ -874,7 +913,7 @@
                         statusInfo: { Activo: { icon: 'fa-fire-alt', text: 'Active Conflict' }, Latente: { icon: 'fa-hourglass-half', text: 'Latent Conflict' }, Resuelto: { icon: 'fa-check-circle', text: 'Resolved Conflict' }, Desconocido: { icon: 'fa-question-circle', text: 'Unknown Status' } },
                         tutorial: { step1: { title: 'Filter Panel', text: 'Here you can filter conflicts by country, name, sector, and more. Select one or more countries and press "View Conflicts" to begin.', icon: 'fa-filter' }, step2: { title: 'Interactive Map', text: 'Conflicts will appear here. Dashed border points indicate an approximate location. Click on a point for more details.', icon: 'fa-map-marked-alt' }, step3: { title: 'Statistics & Details', text: 'This panel shows a summary of the displayed conflicts. When you select a conflict on the map, its detailed information will appear here.', icon: 'fa-chart-bar' }, previous: 'Previous', next: 'Next', finish: 'Finish', skip:'Skip' },
                         welcome: { title: 'Exploration Started', message: 'All set! You can now browse, filter, and discover socio-environmental conflicts. Let your curiosity be your guide!', button: 'Start Exploring' },
-                        footer: { text: 'Developed with data from Wikidata, a Wikimedia Foundation project.', copyright: 'Wikimedia Chile. Content available under a CC BY-SA 4.0 license.' },
+                        footer: {links: { about: 'About', source: 'Source code'}, legal: 'Wikimedia Chile. Content available under CC BY-SA 4.0 license. Developed using data from Wikidata.'},
                         selectAll: 'Select All',
                         deselectAll: 'Deselect All',
                         theme: { toggle: 'Toggle theme' }
@@ -890,7 +929,7 @@
                         statusInfo: { Activo: { icon: 'fa-fire-alt', text: 'Conflitto Attivo' }, Latente: { icon: 'fa-hourglass-half', text: 'Conflitto Latente' }, Resuelto: { icon: 'fa-check-circle', text: 'Conflitto Risolto' }, Desconocido: { icon: 'fa-question-circle', text: 'Stato Sconosciuto' } },
                         tutorial: { step1: { title: 'Pannello Filtri', text: 'Qui puoi filtrare i conflitti per paese, nome, settore e altro. Seleziona uno o più paesi e premi "Mostra Conflitti" per iniziare.', icon: 'fa-filter' }, step2: { title: 'Mappa Interattiva', text: 'I conflitti appariranno qui. I punti con bordo tratteggiato indicano una posizione approssimativa. Clicca su un punto per maggiori dettagli.', icon: 'fa-map-marked-alt' }, step3: { title: 'Statistiche e Dettagli', text: 'Questo pannello mostra un riepilogo dei conflitti visualizzati. Selezionando un conflitto sulla mappa, qui vedrai le sue informazioni dettagliate.', icon: 'fa-chart-bar' }, previous: 'Precedente', next: 'Successivo', finish: 'Fine', skip:'Salta' },
                         welcome: { title: 'Esplorazione Iniziata', message: 'Tutto pronto! Ora puoi navigare, filtrare e scoprire i conflitti socio-ambientali. Lascia che la tua curiosità sia la tua guida!', button: 'Inizia a Esplorare' },
-                        footer: { text: 'Sviluppato con dati da Wikidata, un progetto della Wikimedia Foundation.', copyright: 'Wikimedia Chile. Contenuto disponibile con licenza CC BY-SA 4.0.' },
+                        footer: {links: { about: 'Chi siamo', source: 'Codice sorgente'}, legal: 'Wikimedia Cile. Contenuto disponibile con licenza CC BY-SA 4.0. Sviluppato utilizzando i dati di Wikidata.'},
                         selectAll: 'Seleziona tutto',
                         deselectAll: 'Deseleziona tutto',
                         theme: { toggle: 'Cambia tema' }
@@ -906,7 +945,7 @@
                         statusInfo: { Activo: { icon: 'fa-fire-alt', text: '進行中の紛争' }, Latente: { icon: 'fa-hourglass-half', text: '潜在的な紛争' }, Resuelto: { icon: 'fa-check-circle', text: '解決済みの紛争' }, Desconocido: { icon: 'fa-question-circle', text: '不明なステータス' } },
                         tutorial: { step1: { title: 'フィルターパネル', text: 'ここで国、名前、セクターなどで紛争をフィルターできます。「紛争を表示」を押して開始します。', icon: 'fa-filter' }, step2: { title: 'インタラクティブマップ', text: '紛争はここに表示されます。破線の点はおおよその場所を示します。詳細を見るには点をクリックしてください。', icon: 'fa-map-marked-alt' }, step3: { title: '統計と詳細', text: 'このパネルには表示された紛争の概要が表示されます。地図で紛争を選択すると、詳細情報がここに表示されます。', icon: 'fa-chart-bar' }, previous: '前へ', next: '次へ', finish: '終了', skip:'スキップ' },
                         welcome: { title: '探索開始', message: '準備完了！社会環境紛争を閲覧、フィルタリング、発見できます。好奇心をガイドにしましょう！', button: '探索を始める' },
-                        footer: { text: 'Wikimedia FoundationのプロジェクトであるWikidataのデータを使用して開発されました。', copyright: 'Wikimedia Chile. コンテンツはCC BY-SA 4.0ライセンスで利用可能です。' },
+                        footer: {links: { about: '概要', source: 'ソースコード'}, legal: 'ウィキメディア・チリ。コンテンツは CC BY-SA 4.0 ライセンスの下で利用可能です。Wikidata のデータを使用して開発されました。'},
                         selectAll: 'すべて選択',
                         deselectAll: 'すべて選択解除',
                         theme: { toggle: 'テーマを切り替え' }
@@ -922,7 +961,7 @@
                         statusInfo: { Activo: { icon: 'fa-fire-alt', text: 'Conflito Ativo' }, Latente: { icon: 'fa-hourglass-half', text: 'Conflito Latente' }, Resuelto: { icon: 'fa-check-circle', text: 'Conflito Resolvido' }, Desconocido: { icon: 'fa-question-circle', text: 'Estado Desconhecido' } },
                         tutorial: { step1: { title: 'Painel de Filtros', text: 'Aqui você pode filtrar conflitos por país, nome, setor e mais. Selecione um ou mais países e pressione "Ver Conflitos" para começar.', icon: 'fa-filter' }, step2: { title: 'Mapa Interativo', text: 'Os conflitos aparecerão aqui. Pontos com borda tracejada indicam uma localização aproximada. Clique em um ponto para mais detalhes.', icon: 'fa-map-marked-alt' }, step3: { title: 'Estatísticas e Detalhes', text: 'Este painel mostra um resumo dos conflitos exibidos. Ao selecionar um conflito no mapa, suas informações detalhadas aparecerão aqui.', icon: 'fa-chart-bar' }, previous: 'Anterior', next: 'Próximo', finish: 'Finalizar', skip:'Pular' },
                         welcome: { title: 'Exploração Iniciada', message: 'Tudo pronto! Agora você pode navegar, filtrar e descobrir os conflitos socioambientais. Deixe sua curiosidade ser seu guia!', button: 'Começar a Explorar' },
-                        footer: { text: 'Desenvolvido com dados do Wikidata, um projeto da Fundação Wikimedia.', copyright: 'Wikimedia Chile. Conteúdo disponível sob a licença CC BY-SA 4.0.' },
+                        footer: {links: { about: 'Sobre', source: 'Código-fonte'}, legal: 'Wikimedia Chile. Conteúdo disponível sob a licença CC BY-SA 4.0. Desenvolvido usando dados do Wikidata.'},
                         selectAll: 'Selecionar todos',
                         deselectAll: 'Desmarcar todos',
                         theme: { toggle: 'Alterar tema' }
@@ -938,7 +977,7 @@
                         statusInfo: { Activo: { icon: 'fa-fire-alt', text: 'Conflit Actif' }, Latente: { icon: 'fa-hourglass-half', text: 'Conflit Latent' }, Resuelto: { icon: 'fa-check-circle', text: 'Conflit Résolu' }, Desconocido: { icon: 'fa-question-circle', text: 'Statut Inconnu' } },
                         tutorial: { step1: { title: 'Panneau des filtres', text: 'Ici, vous pouvez filtrer les conflits par pays, nom, secteur, etc. Sélectionnez un ou plusieurs pays et appuyez sur "Voir les conflits" pour commencer.', icon: 'fa-filter' }, step2: { title: 'Carte interactive', text: 'Les conflits apparaîtront ici. Les points avec une bordure en pointillé indiquent un emplacement approximatif. Cliquez sur un point pour plus de détails.', icon: 'fa-map-marked-alt' }, step3: { title: 'Statistiques et détails', text: 'Ce panneau affiche un résumé des conflits visualisés. Lorsque vous sélectionnez un conflit sur la carte, ses informations détaillées s\'affichent ici.', icon: 'fa-chart-bar' }, previous: 'Précédent', next: 'Suivant', finish: 'Terminer', skip:'Passer' },
                         welcome: { title: 'Exploration commencée', message: 'Tout est prêt ! Vous pouvez maintenant parcourir, filtrer et découvrir les conflits socio-environnementaux. Laissez votre curiosité vous guider !', button: 'Commencer à explorer' },
-                        footer: { text: 'Développé avec les données de Wikidata, un projet de la Fondation Wikimedia.', copyright: 'Wikimedia Chile. Contenu disponible sous licence CC BY-SA 4.0.' },
+                        footer: {links: { about: 'À propos', source: 'Code source'}, legal: 'Wikimedia Chile. Contenu disponible sous licence CC BY-SA 4.0. Développé à partir des données de Wikidata.'},
                         selectAll: 'Tout sélectionner',
                         deselectAll: 'Tout désélectionner',
                         theme: { toggle: 'Changer de thème' }
@@ -954,7 +993,7 @@
                         statusInfo: { Activo: { icon: 'fa-fire-alt', text: 'Aktiver Konflikt' }, Latente: { icon: 'fa-hourglass-half', text: 'Latenter Konflikt' }, Resuelto: { icon: 'fa-check-circle', text: 'Gelöster Konflikt' }, Desconocido: { icon: 'fa-question-circle', text: 'Unbekannter Status' } },
                         tutorial: { step1: { title: 'Filterbereich', text: 'Hier können Sie Konflikte nach Land, Name, Sektor und mehr filtern. Wählen Sie ein oder mehrere Länder aus und drücken Sie "Konflikte anzeigen", um zu beginnen.', icon: 'fa-filter' }, step2: { title: 'Interaktive Karte', text: 'Konflikte werden hier angezeigt. Gestrichelte Punkte deuten auf einen ungefähren Standort hin. Klicken Sie auf einen Punkt für weitere Details.', icon: 'fa-map-marked-alt' }, step3: { title: 'Statistiken & Details', text: 'Dieser Bereich zeigt eine Zusammenfassung der angezeigten Konflikte. Wenn Sie einen Konflikt auf der Karte auswählen, werden hier dessen detaillierte Informationen angezeigt.', icon: 'fa-chart-bar' }, previous: 'Zurück', next: 'Weiter', finish: 'Beenden', skip:'Überspringen' },
                         welcome: { title: 'Erkundung gestartet', message: 'Alles bereit! Sie können jetzt sozio-ökologische Konflikte durchsuchen, filtern und entdecken. Lassen Sie sich von Ihrer Neugier leiten!', button: 'Erkundung starten' },
-                        footer: { text: 'Entwickelt mit Daten von Wikidata, einem Projekt der Wikimedia Foundation.', copyright: 'Wikimedia Chile. Inhalte verfügbar unter der CC BY-SA 4.0 Lizenz.' },
+                        footer: {links: { about: 'Über', source: 'Quellcode'}, legal: 'Wikimedia Chile. Inhalte verfügbar unter der CC BY-SA 4.0 Lizenz. Entwickelt unter Verwendung von Daten aus Wikidata.' },
                         selectAll: 'Alle auswählen',
                         deselectAll: 'Auswahl aufheben',
                         theme: { toggle: 'Thema wechseln' }
